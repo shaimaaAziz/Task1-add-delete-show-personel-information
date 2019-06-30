@@ -1,5 +1,9 @@
 
  @extends('layouts.app')
+ <head>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ </head>
         <body>
             <div class="content">
                 <div class="container-fluid">
@@ -54,7 +58,27 @@
                                                            <td>{{$information->SecondName}}</td>
                                                            <td>{{$information->ThirdName}}</td>
                                                            <td>{{$information->FourthName}}</td>
-                                                           <td>{{$information->relative_relation}}</td>
+
+
+                                                             <td>
+                                                                 @if( $information->relative_relation == 1)
+                                                                     {{ $information->relative_relation ='father' }}
+                                                                 @elseif($information->relative_relation == 2)
+                                                                     {{ $information->relative_relation ='mother' }}
+                                                                 @elseif($information->relative_relation == 3)
+                                                                     {{ $information->relative_relation ='Grandpa' }}
+                                                                 @elseif($information->relative_relation == 4)
+                                                                     {{ $information->relative_relation ='Grandma' }}
+                                                                 @elseif($information->relative_relation == 5)
+                                                                     {{ $information->relative_relation ='brother' }}
+                                                                 @elseif($information->relative_relation == 6)
+                                                                     {{ $information->relative_relation ='sister' }}
+                                                                 @elseif($information->relative_relation == 7)
+                                                                     {{ $information->relative_relation ='Aunt' }}
+                                                                 @elseif($information->relative_relation == 8)
+                                                                     {{ $information->relative_relation ='uncle' }}
+                                                                 @endif
+                                                             </td>
                                                            <td>{{$information->Date_of_Birth}}</td>
                                                            <td>{{$information->Social_status}}</td>
 
@@ -85,12 +109,8 @@
                                                                    @csrf
                                                                    @method('DELETE')
                                                                </form>
-                                                               <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
-                                                                       event.preventDefault();
-                                                                       document.getElementById('delete-form-{{ $information->id }}').submit();
-                                                                       }else {
-                                                                       event.preventDefault();
-                                                                       }"><i class="material-icons">delete</i></button></td>
+                                                              <button type="button" class="btn btn-danger btn-sm del" data-id="{{ $information->id }}">delete</button></td>
+
                                                          </tr>
                                                      @endforeach
 
@@ -105,6 +125,29 @@
                 </div>
              </div>
         </body>
+ <script>
+     $(".document").ready(function(){
+     $(".del").click(function(){
+        var id = $(this).data("id");
+         $.ajax(
+             {
+                 url: "information/"+id,
+                 method:'delete',
+                 // dataType: "JSON",
+                 data:{ body:
+                         '', _token:'{{csrf_token()}}'},
+
+                 success: function ()
+                 {
+                     console.log("it Work");
+                     alert(id);
+                     window.location.reload();
+                 }
+             });
+
+     });
+     });
+ </script>
 
 </html>
 

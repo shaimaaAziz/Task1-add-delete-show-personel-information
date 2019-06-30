@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use Faker\Provider\Image;
+use App\RelativeRelation;
 use Illuminate\Http\Request;
 use Image;
 class informationFamily extends Controller
@@ -15,6 +16,7 @@ class informationFamily extends Controller
     public function index()
     {
         $info =\App\InformationFamily::all();
+
         return view('information/index',compact('info'));
     }
 
@@ -26,7 +28,8 @@ class informationFamily extends Controller
     public function create()
     {
         $info = \App\InformationFamily::all();
-        return view('information/create',compact('info'));
+        $relative =   RelativeRelation::all();
+        return view('information/create',compact('info','relative'));
     }
 
     /**
@@ -36,16 +39,16 @@ class informationFamily extends Controller
     {
 
        $this->validate($request,[
-//            'FirstName'=>'required',
-//            'SecondName'=>'required',
-//            'ThirdName'=>'required',
-//            'FourthName'=>'required',
-//            'relative_relation'=>'required',
-//            'Date_of_Birth'=>'required',
-//            'Social_status'=>'required',
-//            'Study'=>'required',
-//            'work'=>'required',
-//            'images'=>'image'
+            'first'=>'required',
+            'second'=>'required',
+            'third'=>'required',
+            'forth'=>'required',
+            'relative_relation'=>'required',
+            'date'=>'required',
+            'Social_status'=>'required',
+            'study'=>'required',
+            'work'=>'required',
+            'images'=>'image'
         ]);
 
             $info = new \App\InformationFamily();
@@ -122,7 +125,10 @@ class informationFamily extends Controller
         $info = \App\InformationFamily::find($id);
         $info->delete();
 
-        return redirect()->route('information.index')->with('successMsg',' deleted successfully' );
+//        return redirect()->route('information.index')->with('successMsg',' deleted successfully' );
+
+
+        return response('successifull',200);
         $info->save();
     }
 }

@@ -17,7 +17,7 @@ class informationFamilies extends Seeder
             'SecondName' => 'abdelAziz',
             'ThirdName' => 'mohamud',
             'FourthName' => 'harb',
-            'relative_relation' => 'sis',
+            'relative_relation' => 'sister',
             'Date_of_Birth' => '1998-05-17',
             'Social_status' => 'single',
             'Study' => 'true',
