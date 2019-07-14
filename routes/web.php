@@ -18,3 +18,19 @@ Route::get('/', function () {
 
 
 Route::resource('information','informationFamily');
+
+////
+//Route::get('/information/create', function () {
+//    return view('welcome');
+//});
+
+//
+//
+//Route::get('/infoCreate', function () {
+//    return view('information\create');
+//});
+//
+//
+//Route::get('/info','informationFamily@store');
+//
+//Route::delete('information','informationFamily@destroy');

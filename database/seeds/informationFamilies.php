@@ -17,12 +17,11 @@ class informationFamilies extends Seeder
             'SecondName' => 'abdelAziz',
             'ThirdName' => 'mohamud',
             'FourthName' => 'harb',
-            'relative_relation' => 'sister',
+            'relative_relation' => '1',
             'Date_of_Birth' => '1998-05-17',
             'Social_status' => 'single',
-            'Study' => 'true',
-            'work' => 'false',
-
+            'Study' => '1',
+            'work' => '0',
             'image' => 'sh.jpg'
         ]);
     }

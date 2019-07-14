@@ -17,7 +17,10 @@ class informationFamily extends Controller
     {
         $info =\App\InformationFamily::all();
 
-        return view('information/index',compact('info'));
+//        return view('information/index',compact('info'));
+        return response()->json([
+            'info' => $info
+        ], 200);
     }
 
     /**
@@ -27,9 +30,16 @@ class informationFamily extends Controller
      */
     public function create()
     {
+
         $info = \App\InformationFamily::all();
         $relative =   RelativeRelation::all();
-        return view('information/create',compact('info','relative'));
+//        return view('information/create',compact('info','relative'));
+
+        return response()->json([
+            'info' => $info ,
+             'relative' => $relative
+        ], 200);
+
     }
 
     /**
@@ -39,28 +49,28 @@ class informationFamily extends Controller
     {
 
        $this->validate($request,[
-            'first'=>'required',
-            'second'=>'required',
-            'third'=>'required',
-            'forth'=>'required',
-            'relative_relation'=>'required',
-            'date'=>'required',
+            'FirstName'=>'required',
+            'SecondName'=>'required',
+            'ThirdName'=>'required',
+            'FourthName'=>'required',
+           'relative_relation'=>'required',
+            'Date_of_Birth'=>'required',
             'Social_status'=>'required',
-            'study'=>'required',
+            'Study'=>'required',
             'work'=>'required',
             'images'=>'image'
         ]);
 
             $info = new \App\InformationFamily();
 
-          $info->FirstName =$request->first;
-          $info->SecondName =$request->second;
-          $info->ThirdName =$request->third;
-          $info->FourthName =$request->forth;
+          $info->FirstName =$request->FirstName;
+          $info->SecondName =$request->SecondName;
+          $info->ThirdName =$request->ThirdName;
+          $info->FourthName =$request->FourthName;
           $info->relative_relation =$request->relative_relation;
-          $info->Date_of_Birth =$request->date;
+          $info->Date_of_Birth =$request->Date_of_Birth;
           $info->Social_status =$request->Social_status;
-          $info->Study =$request->study;
+          $info->Study =$request->Study;
           $info->work =$request->work;
 
 
@@ -75,8 +85,12 @@ class informationFamily extends Controller
         }
 
         $info->save();
-        return redirect()->route('information.index')->with('successMsg','add successfully' );
-;
+//        return redirect()->route('information.index')->with('successMsg','add successfully' );
+        return response()->json([
+        'infos'    => $info
+        ,
+        'message' => 'Success'
+    ], 200);
 
     }
 
